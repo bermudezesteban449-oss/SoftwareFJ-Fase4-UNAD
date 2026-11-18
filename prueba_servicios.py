@@ -45,10 +45,10 @@ registrar_evento("prueba de reserva ejecutada correctamente.")
 print("\n=== prueba de error cliente ===")
 
 try:
-    cliente(
+  Cliente(
         "C002",
         "",
-        "correo"
+        "correo",
         "abc"
 
     )
@@ -57,7 +57,7 @@ except DatosInvalidosError as error:
     registrar_error(str(error))
     print("Error detectado:", error)
 
-    print("\n=== PRUEBA SERVICIO NO DISPONIBLE ===")
+print("\n=== PRUEBA SERVICIO NO DISPONIBLE ===")
 
 try:
     sala_error = Sala(
