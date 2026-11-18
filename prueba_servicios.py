@@ -4,6 +4,8 @@ from equipo import Equipo
 from asesoria import Asesoria
 from cliente import Cliente 
 from reserva import Reserva
+from excepciones import DatosInvalidosError
+from registro_logs import registrar_evento, registrar_error
 
 servicios = [
     Sala("S001", "Sala de reuniones", 50000, 10),
@@ -37,3 +39,39 @@ costo = reserva.procesar()
 
 print(f"costo total: ${costo:,.0f}")
 print(f"estado: {reserva.estado}")
+
+registrar_evento("prueba de reserva ejecutada correctamente.")
+
+print("\n=== prueba de error cliente ===")
+
+try:
+    cliente(
+        "C002",
+        "",
+        "correo"
+        "abc"
+
+    )
+
+except DatosInvalidosError as error:
+    registrar_error(str(error))
+    print("Error detectado:", error)
+
+    print("\n=== PRUEBA SERVICIO NO DISPONIBLE ===")
+
+try:
+    sala_error = Sala(
+        "S002",
+        "Sala Ejecutiva",
+        50000,
+        20
+    )
+
+    sala_error.cambiar_disponibilidad(False)
+
+    sala_error.calcular_costo(2)
+
+except Exception as error:
+    registrar_error(str(error))
+    print("Error detectado:", error)
+
